@@ -66,7 +66,7 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("http://localhost:8000/api/projects/")
+      .get("/api/projects/")
       .then(res => this.setState({ projectList: res.data }))
       .catch(err => console.log(err));
   };
@@ -80,19 +80,19 @@ class App extends Component {
     if (item.id) {
       // Editing a project
       axios
-        .put(`http://localhost:8000/api/projects/${item.id}/`, item)
+        .put(`/api/projects/${item.id}/`, item)
         .then(res => this.refreshList());
       return;
     }
     // Adding a new project
     axios
-      .post("http://localhost:8000/api/projects/", item)
+      .post("/api/projects/", item)
       .then(res => this.refreshList());
   };
 
   handleDelete = item => {
     axios
-      .delete(`http://localhost:8000/api/projects/${item.id}`)
+      .delete(`/api/projects/${item.id}`)
       .then(res => this.refreshList());
   };
 
