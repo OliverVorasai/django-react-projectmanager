@@ -1,6 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Modal from "./components/Modal";
 import axios from "axios";
+import {
+  Button,
+  Collapse,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+  CardFooter,
+} from "reactstrap";
+
+const ProjectDetails = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
+  const { title, description, start, deadline, owner } = props.item;
+  return (
+    <div>
+      <Button color="primary" onClick={toggle} style={{ marginTop: '1rem', marginBottom: '1rem' }}>Show Details</Button>
+      <Collapse isOpen={isOpen}>
+        <Card>
+          <CardBody>
+            <CardTitle>{title}</CardTitle>
+            <CardSubtitle>{description}</CardSubtitle>
+            <CardText>
+              Start Date: {start}
+              <br />
+              Deadline: {deadline}
+            </CardText>
+            <CardFooter>
+
+              Project Owner: {owner}
+            </CardFooter>
+          </CardBody>
+        </Card>
+      </Collapse>
+    </div>
+  );
+}
 
 class App extends Component {
   constructor(props) {
@@ -107,9 +147,12 @@ class App extends Component {
           title={item.description}
         >
           {item.title}
+          <ProjectDetails
+            item={item}
+          />
         </span>
         <span>
-          <button onClick={() => this.editItem(item)} className="btn btn-secondary mr-2">Edit</button>
+          <button onClick={() => this.editItem(item)} className="btn btn-info mr-2">Edit</button>
           <button onClick={() => this.handleDelete(item)} className="btn btn-danger">Delete </button>
         </span>
       </li>
@@ -119,9 +162,9 @@ class App extends Component {
   render() {
     return (
       <main className="content">
-        <h1 className="text-white text-uppercase text-center my-4">Project Manager App</h1>
+        <h1 className="text-black text-uppercase text-center my-4">Project Manager App</h1>
         <div className="row">
-          <div className="col-md-6 col-sm-10 mx-auto p-0">
+          <div className="col-md-11 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="">
                 <button onClick={this.createItem} className="btn btn-primary">Add Project</button>

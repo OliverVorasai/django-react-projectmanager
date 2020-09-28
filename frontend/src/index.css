@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #ffffff;
 }
 .project-title {
   cursor: pointer;
@@ -24,4 +24,8 @@ body {
 .tab-list > span.active {
   background-color: #282c34;
   color: #ffffff;
+}
+
+.card {
+  border: 1px solid #000000;
 }
